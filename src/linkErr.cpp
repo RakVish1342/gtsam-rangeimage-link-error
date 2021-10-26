@@ -84,4 +84,5 @@ int main(int argc, char ** argv) {
  * Error is reported when range_image gets deleted. That is, either when program finishes execution of func() causing the deletion of the range_image variable OR when range_image is manually deleted, there is a "double free or corruption (out) Aborted (core dumped)". 
  * Again, all these issues only happen if gtsam is linked to the program's executable. Else, range_image and entire code works perfectly fine. I'm not sure how double deletion of range_image or memory overwriting of range_image happens just because gtsam is linked with the program's executable.
  * Just to be clear: The same error occurs if pcl::RangeImage is used directly rather than using its  pcl::RangeImage::Ptr version. So the issue has nothing to do with how the range_image pointer is being created.
+ * Also please note: This test code does not make any calls or references to gtsam in any manner, so the issue arises due to some issue in the way gtsam is being linked to the program's executable. 
  */
