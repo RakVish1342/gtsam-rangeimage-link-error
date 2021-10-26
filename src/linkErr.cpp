@@ -79,9 +79,9 @@ int main(int argc, char ** argv) {
 }
 
 // ISSUES:
-/* When gtsam is not linked to executable, range_image performs as expected and creates (height, width)=353x300 image.
- * When gtsam is lined to the executable, range_image not created due to "double free or corruption (out) Aborted (core dumped)" error. Initialized range_image of (height, width)=(0, 0) size is retained
- * Issue occurs when range_image goes out of scope. That is, either when program exits func() and range_image gets deleted OR when range_image is manually deleted, there is a "double free or corruption (out) Aborted (core dumped)". 
- * Again, all these issues only happen if gtsam is linked to the given library. Else range_image and entire code works perfectly fine. I'm not sure how double deletion of range_image or memory overwriting of range_image happens just because gtsam is linked with the executable.
- * Also, same issue occur if pcl::RangeImage is used directly rather than using its  pcl::RangeImage::Ptr version. So the issue has nothing to do with how the range_image pointer is being created.
+/* When gtsam is not linked to program's executable, range_image performs as expected and creates (height, width)=353x300 image.
+ * When gtsam is linked to the program's executable, range_image is not created due to "double free or corruption (out) Aborted (core dumped)" error. Print statement reports range_image of initialized size of (height, width)=(0, 0).
+ * Error is reported when range_image gets deleted. That is, either when program finishes execution of func() causing the deletion of the range_image variable OR when range_image is manually deleted, there is a "double free or corruption (out) Aborted (core dumped)". 
+ * Again, all these issues only happen if gtsam is linked to the program's executable. Else, range_image and entire code works perfectly fine. I'm not sure how double deletion of range_image or memory overwriting of range_image happens just because gtsam is linked with the program's executable.
+ * Just to be clear: The same error occurs if pcl::RangeImage is used directly rather than using its  pcl::RangeImage::Ptr version. So the issue has nothing to do with how the range_image pointer is being created.
  */
